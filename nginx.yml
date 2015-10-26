@@ -1,0 +1,19 @@
+---
+- hosts: webservers
+  vars:
+    user: www-data
+    worker_processes: 2
+    pid: /run/nginx.pid
+    worker_connections: 768
+  tasks:
+  - name: install nginx
+    apt: name=nginx state=latest
+  - name: ensure nginx is running (and enable it at boot)
+    service: name=nginx state=started enabled=yes
+  - name: write the nginx config file
+    template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    notify:
+    - restart nginx
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
