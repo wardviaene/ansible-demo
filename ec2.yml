@@ -6,7 +6,7 @@
     keypair: ansible
     instance_type: t2.micro
     security_group: sg-ba9a5ede
-    image: ami-47a23a30
+    image: ami-f95ef58a
     region: eu-west-1
     subnet: subnet-7a522c0d
     groupname: webservers
